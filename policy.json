@@ -1,0 +1,67 @@
+{
+  "properties": {
+    "displayName": "RG-test4",
+    "policyType": "Custom",
+    "mode": "All",
+    "metadata": {
+      "category": "Tag",
+      "createdBy": "72d7a7ec-a345-4282-a2e7-dd24c455a7e8",
+      "createdOn": "2024-06-30T09:51:59.9657555Z",
+      "updatedBy": null,
+      "updatedOn": null
+    },
+    "version": "1.0.0",
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Tag Name",
+          "description": "Name of the tag, such as 'SolutionLead'"
+        }
+      },
+      "allowedTagValues": {
+        "type": "Array",
+        "metadata": {},
+        "defaultValue": [
+          "a@gmail.com",
+          "b@gmail.com"
+        ]
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+          },
+          {
+            "field": "tags['SolutionLead]",
+            "exists": false
+          },
+          {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "notIn": "[parameters('allowedTagValues')]"
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    },
+    "versions": [
+      "1.0.0"
+    ]
+  },
+  "id": "/subscriptions/59e6262e-1728-4738-8bb3-055b62fe5cba/providers/Microsoft.Authorization/policyDefinitions/6a81a618-910e-476c-bb0d-db1c59ae446e",
+  "type": "Microsoft.Authorization/policyDefinitions",
+  "name": "6a81a618-910e-476c-bb0d-db1c59ae446e",
+  "systemData": {
+    "createdBy": "msazureboss@gmail.com",
+    "createdByType": "User",
+    "createdAt": "2024-06-30T09:51:59.9317714Z",
+    "lastModifiedBy": "msazureboss@gmail.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2024-06-30T09:51:59.9317714Z"
+  }
+}
